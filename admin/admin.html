@@ -286,6 +286,12 @@
             //HOST_MARKER_E
         }
 
+        static authToken() {
+            //TOKEN_MARKER_S
+            return "";
+            //TOKEN_MARKER_E
+        }
+
         static toJSONCall(method, params) {
             return JSON.stringify({
                 'jsonrpc': '2.0',
@@ -298,7 +304,10 @@
             const request = {
                 method: "POST",
                 body: json_params,
-                headers: {"Content-type": "application/json; charset=UTF-8"}
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8",
+                    "Authorization": "Basic " + this.authToken()
+                }
             }
 
             return fetch(this.defaultHost(), request).then((response) => response.json());
@@ -813,3 +822,4 @@
 </script>
 
 </html>
+
